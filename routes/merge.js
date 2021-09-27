@@ -41,12 +41,12 @@ Router.post('/mergePdf', upload.array('pdf', 10), (req, res, next) => {
         })
         const fileName = uuidv4() + '.pdf';
         merger.save('uploads/' + fileName).then(() => {
-            req.files.forEach(file => {
-                fs.unlink(file.path, err => {
-                    if (err) throw err;
-                    else console.log('Successfully deleted');
-                });
-            })
+            // req.files.forEach(file => {
+            //     fs.unlink(file.path, err => {
+            //         if (err) throw err;
+            //         else console.log('Successfully deleted');
+            //     });
+            // })
             res.send(['ciao', 'ciao', 'ciao']);
             // res.download('uploads/' + fileName);
         });
