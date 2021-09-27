@@ -47,7 +47,8 @@ Router.post('/mergePdf', upload.array('pdf', 10), (req, res, next) => {
                     else console.log('Successfully deleted');
                 });
             })
-            res.download('uploads/' + fileName);
+            res.send(['ciao', 'ciao', 'ciao']);
+            // res.download('uploads/' + fileName);
         });
     }
 });
