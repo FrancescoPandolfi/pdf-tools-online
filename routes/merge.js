@@ -52,6 +52,8 @@ Router.post('/mergePdf', upload.array('pdf', 10), (req, res, next) => {
     }
 });
 
+Router.get('/list', (req, res) => res.send(['ciao', 'ciao', 'ciao']));
+
 module.exports = Router;
 
 

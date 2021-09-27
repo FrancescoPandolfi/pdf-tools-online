@@ -19,7 +19,7 @@ function App() {
         const formData = new FormData();
         files.forEach(file => formData.append('pdf', file));
         axios
-            .post('http://localhost:8888/mergePdf', formData, {
+            .post('https://secret-gorge-76911.herokuapp.com/api/mergePdf', formData, {
                 responseType: "arraybuffer",
                 headers: {
                     'Content-Type': 'multipart/form-data'
