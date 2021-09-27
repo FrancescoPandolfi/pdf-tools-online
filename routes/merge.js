@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
         cb(null, './uploads')
     },
     filename: (req, file, cb) => {
-        cb(null, uuidv4() + file.originalname);
+        cb(null, uuidv4());
     }
 });
 
@@ -37,20 +37,20 @@ Router.post('/mergePdf', upload.array('pdf', 10), (req, res, next) => {
     if (req.files) {
         console.log(req.files)
         req.files.forEach(file => {
+            console.log(file.path);
             merger.add(file.path);
         })
         const fileName = uuidv4() + '.pdf';
         res.send(['ciao', 'ciao', 'ciao']);
-        // merger.save('uploads/' + fileName).then(() => {
-        //     // req.files.forEach(file => {
-        //     //     fs.unlink(file.path, err => {
-        //     //         if (err) throw err;
-        //     //         else console.log('Successfully deleted');
-        //     //     });
-        //     // })
-        //     res.send(['ciao', 'ciao', 'ciao']);
-        //     // res.download('uploads/' + fileName);
-        // });
+        merger.save('uploads/' + fileName).then(() => {
+            req.files.forEach(file => {
+                fs.unlink(file.path, err => {
+                    if (err) throw err;
+                    else console.log('Successfully deleted');
+                });
+            })
+            res.download('uploads/' + fileName);
+        });
     }
 });
 
