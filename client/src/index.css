@@ -19,4 +19,8 @@ body {
     height: auto !important;
 }
 
+.react-pdf__Page__textContent {
+    display: none;
+}
+
 

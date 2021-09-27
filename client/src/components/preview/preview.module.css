@@ -1,12 +1,37 @@
 .preview {
     width: 100px;
+    height: 150px;
     padding: 10px;
     margin-right: 10px;
+    margin-bottom: 10px;
     border-radius: 10px;
     border: 1px solid black;
-    /*background-color: aquamarine;*/
+    font-size: 25px;
+    position: relative;
 }
 
 .pdf {
     width: 100%;
+}
+
+.arrowsLeft {
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+}
+
+.arrowsRight {
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+}
+
+.cancelPdf {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #FF6F6B;
+    cursor: pointer;
 }

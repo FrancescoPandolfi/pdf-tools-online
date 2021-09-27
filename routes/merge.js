@@ -33,11 +33,10 @@ const upload = multer({
 });
 const merger = new PDFMerger();
 
-Router.post('/', upload.array('pdf', 10), (req, res, next) => {
+Router.post('/mergePdf', upload.array('pdf', 10), (req, res, next) => {
     if (req.files) {
         console.log(req.files)
         req.files.forEach(file => {
-
             merger.add(file.path);
         })
         const fileName = uuidv4() + '.pdf';

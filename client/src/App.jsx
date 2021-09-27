@@ -9,18 +9,17 @@ import css from "./app.module.css";
 function App() {
     const [files, setFiles] = useState([]);
 
-    // Add files to list
+    // Add files to state
     const addFiles = (newFiles) => {
         setFiles(files.concat(newFiles));
-        console.log(files);
     }
 
-    // Send file and download
+    // Send files to server and download merged file
     const mergePdf = () => {
         const formData = new FormData();
         files.forEach(file => formData.append('pdf', file));
         axios
-            .post('http://localhost:8888/', formData, {
+            .post('http://localhost:8888/mergePdf', formData, {
                 responseType: "arraybuffer",
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -37,6 +36,19 @@ function App() {
             });
     }
 
+    // Move pdf position and reset state
+    const movePdf = (index, newIndex) => {
+        const element = files.splice(index, 1);
+        files.splice(newIndex, 0, element[0]);
+        setFiles([...files]);
+    }
+
+    // Delete pdf and reset state
+    const deletePdf = (index) => {
+        const newArray = files.filter((file, i) => i !== index);
+        setFiles([...newArray]);
+    }
+
     return (
         <>
             <Header/>
@@ -44,7 +56,8 @@ function App() {
                 <Dropzone onAdd={addFiles} files={files} mergePdf={mergePdf}/>
                 <div className={css.previewContainer}>
                     {files.map((file, index) => (
-                        <Preview key={index} file={file} />
+                        <Preview key={index} file={file} files={files} index={index} movePdf={movePdf}
+                                 deletePdf={deletePdf}/>
                     ))}
                 </div>
             </div>
