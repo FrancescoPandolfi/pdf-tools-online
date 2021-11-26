@@ -35,13 +35,10 @@ const merger = new PDFMerger();
 
 Router.post('/mergePdf', upload.array('pdf', 10), (req, res, next) => {
     if (req.files) {
-        console.log(req.files)
         req.files.forEach(file => {
-            console.log(file.path);
             merger.add(file.path);
         })
         const fileName = uuidv4() + '.pdf';
-        res.send(['ciao', 'ciao', 'ciao']);
         merger.save('uploads/' + fileName).then(() => {
             req.files.forEach(file => {
                 fs.unlink(file.path, err => {
@@ -53,8 +50,6 @@ Router.post('/mergePdf', upload.array('pdf', 10), (req, res, next) => {
         });
     }
 });
-
-Router.get('/list', (req, res) => res.send(['ciao', 'ciao', 'ciao']));
 
 module.exports = Router;
 
